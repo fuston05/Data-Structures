@@ -47,7 +47,7 @@ class LinkedList:
     Removes the Node that `self.tail` is referring to and returns the 
     Node's data
 
-    What's the runtime of this method?
+    What's the runtime of this method? O(n)
     '''
     def remove_tail(self):
         if self.tail is None:
@@ -106,7 +106,7 @@ class LinkedList:
     Traverses the linked list and returns a boolean indicating whether the 
     specified `data` is in the linked list.
 
-    What's the runtime for this method?
+    What's the runtime for this method? O(n)
     '''
     def contains(self, data):
         # an empty linked list can't contain what we're looking for 
@@ -133,7 +133,7 @@ class LinkedList:
     '''
     Traverses the linked list, fetching the max value in the linked list
 
-    What is the runtime of this method?
+    What is the runtime of this method? O(n)
     '''
     def get_max(self):
         if self.head is None:
