@@ -32,8 +32,9 @@ class ListNode:
     accordingly, effectively deleting this ListNode."""
 
     def delete(self):
-        if self.prev:
+        if self.prev: 
             self.prev.next = self.next
+        # heads next
         if self.next:
             self.next.prev = self.prev
 
@@ -79,16 +80,15 @@ class DoublyLinkedList:
     the old tail node's next pointer accordingly."""
 
     def add_to_tail(self, value):
-        # if not empty
-        if self.tail != None:
-            currentTail = self.tail
-            newNode = ListNode(value, currentTail, None)
-            newNode.insert_after(currentTail)
-            self.tail = newNode
-            self.prev = currentTail
+        # if there's a tail
+        if self.length > 0:
+            curTail = self.tail
+            curTail.next = ListNode(value, curTail, None)
+            self.tail = curTail.next
             self.length += 1
         else:
-            return None
+            ListNode(value, None, None)
+            self.length += 1
 
     """Removes the List's current tail node, making the 
     current tail's previous node the new tail of the List.
@@ -113,33 +113,33 @@ class DoublyLinkedList:
     the node was the head or the tail"""
 
     def delete(self, node):
-        if node:
-            if node == self.head:
-                if node.next:
-                    self.head= node.next
-                    node.delete()
-                    self.length-= 1
-                else:
-                    self.head= None
-                    self.tail= None
-                    node.delete()
-                    self.length= 0
-
-            elif node == self.tail:
-                if node.prev:
-                    self.tail= node.prev
-                    node.delete()
-                    self.length-= 1
-                else: 
-                    self.tail= None
-                    self.head= None
-                    node.delete()
-                    self.length= 0
-
+        if node == self.head:
+            if node.next != None:
+                # set new head
+                curHead= node
+                self.head = curHead.next
+                self.head.prev = None
+                self.length -= 1
             else:
-                node.delete()
-                self.length-= 1
+                self.head = None
+                self.tail = None
+                self.length = 0
 
+        elif node == self.tail:
+            if node.prev != None:
+                curTail= node
+                # set new tail
+                self.tail = curTail.prev
+                self.tail.next = None
+                self.length -= 1
+            else:
+                self.tail = None
+                self.head = None
+                self.length = 0
+
+        else:
+            node.delete()
+            self.length -= 1
 
     """Returns the highest value currently in the list"""
 

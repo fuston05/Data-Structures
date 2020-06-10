@@ -73,9 +73,9 @@ class DoublyLinkedListTests(unittest.TestCase):
         self.assertEqual(node_1.next, node_3)
         self.assertEqual(node_3.prev, node_1)
 
-    # def test_node_insert_before(self):
-    #     self.node.insert_before(0)
-    #     self.assertEqual(self.node.prev.value, 0)
+    def test_node_insert_before(self):
+        self.node.insert_before(0)
+        self.assertEqual(self.node.prev.value, 0)
 
     def test_list_add_to_head(self):
         self.assertEqual(self.dll.head.value, 1)
