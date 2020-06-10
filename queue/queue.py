@@ -179,39 +179,39 @@ class LinkedList:
 # *****************************************************************
 
 
-class Queue:
-    def __init__(self):
-        self.size = 0
-        self.storage = LinkedList()
-
-    def __len__(self):
-        return self.size
-
-    def enqueue(self, value):
-        self.storage.add_to_tail(value)
-        self.size += 1
-
-    def dequeue(self):
-        if self.size > 0:
-            popped = self.storage.remove_head()
-            self.size -= 1
-            return popped
-
-# list implementation
 # class Queue:
 #     def __init__(self):
 #         self.size = 0
-#         self.storage = []
+#         self.storage = LinkedList()
 
 #     def __len__(self):
 #         return self.size
 
 #     def enqueue(self, value):
-#         self.storage.insert(0, value)
-#         self.size+=1
+#         self.storage.add_to_tail(value)
+#         self.size += 1
 
 #     def dequeue(self):
 #         if self.size > 0:
-#             popped= self.storage.pop()
-#             self.size-=1
+#             popped = self.storage.remove_head()
+#             self.size -= 1
 #             return popped
+
+# list implementation
+class Queue:
+    def __init__(self):
+        self.size = 0
+        self.storage = []
+
+    def __len__(self):
+        return self.size
+
+    def enqueue(self, value):
+        self.storage.insert(0, value)
+        self.size+=1
+
+    def dequeue(self):
+        if self.size > 0:
+            popped= self.storage.pop()
+            self.size-=1
+            return popped
