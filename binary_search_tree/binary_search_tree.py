@@ -48,14 +48,22 @@ class BSTNode:
     # False if it does not
     def contains(self, target):
         pass
-
     # Return the maximum value found in the tree
     def get_max(self):
         pass
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        pass
+        # current node
+        currentNode= self
+        fn(currentNode.value)
+        if self.left:
+            nextLeft= self.left
+            nextLeft.for_each(fn)
+        if self.right:
+            nextRight= self.right
+            nextRight.for_each(fn)
+
 
     # Part 2 -----------------------
 
