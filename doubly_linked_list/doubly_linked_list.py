@@ -112,19 +112,8 @@ class DoublyLinkedList:
     def move_to_front(self, node):
         # is this the tail?
         if node is self.tail:
-            prevTail= self.tail
-            # set new tail to old tail's prev
-            self.tail= prevTail.prev
-            self.tail.next= None
-
-            # prev head
-            prevHead= self.head
-            prevHead.prev= node
-
-            # set node to the new head
-            self.head= prevTail
-            self.head.next= prevHead
-            self.head.prev= None
+            oldTail= self.remove_from_tail()
+            self.add_to_head(oldTail)
 
         # if node is the head already
         elif node is self.head:
@@ -132,23 +121,8 @@ class DoublyLinkedList:
 
         # if node is not the tail or the head
         else:
-            # get prev head
-            prevHead= self.head
-            prevHead.prev= node
-
-            # rearrange old spot's pointers
-            # get prev and next before we move node
-            curNext= node.next
-            curPrev= node.prev
-            print(f'CUR PREV: {node.prev}')
-
-            # new prev and next
-            curNext.prev= node.prev
-            curPrev.next= node.next
-            # set node to the new head
-            self.head= node
-            self.head.prev= None
-            self.head.next= prevHead
+            oldNodeData= self.delete(node)
+            self.add_to_head(oldNodeData)
 
 
     """Removes the input node from its current spot in the 
@@ -161,6 +135,7 @@ class DoublyLinkedList:
     the node was the head or the tail"""
 
     def delete(self, node):
+        data= node.value
         if node == self.head:
             if node.next != None:
                 # set new head
@@ -188,6 +163,7 @@ class DoublyLinkedList:
         else:
             node.delete()
             self.length -= 1
+        return data
 
     """Returns the highest value currently in the list"""
 
