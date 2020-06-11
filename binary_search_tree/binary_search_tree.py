@@ -1,7 +1,7 @@
 """
-Binary search trees are a data structure that enforce an ordering over 
-the data they store. That ordering in turn makes it a lot more efficient 
-at searching for a particular piece of data in the tree. 
+Binary search trees are a data structure that enforce an ordering over
+the data they store. That ordering in turn makes it a lot more efficient
+at searching for a particular piece of data in the tree.
 
 This part of the project comprises two days:
 1. Implement the methods `insert`, `contains`, `get_max`, and `for_each`
@@ -9,6 +9,8 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BSTNode class.
 """
+
+
 class BSTNode:
     def __init__(self, value):
         self.value = value
@@ -17,25 +19,94 @@ class BSTNode:
 
     # Insert the given value into the tree
     def insert(self, value):
-        pass
+        # compare the value to the root's value to determine which direction
+        # we're gonna go in
+        # if the value < root's value
+        if value < self.value:
+            # go left
+            # how do we go left?
+            # we have to check if there is another node on the left side
+            if self.left:
+                # then self.left is a Node
+                # now what?
+                self.left.insert(value)
+            else:
+                # then we can park the value here
+                self.left = BSTNode(value)
+        # else the value >= root's value
+        else:
+            # go right
+            # how do we go right?
+            # we have to check if there is another node on the right side
+            if self.right:
+                # then self.right is a Node
+                self.right.insert(value)
+            else:
+                self.right = BSTNode(value)
 
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        pass
+        currentNode = self
+        # if current node is too big
+        if currentNode.value > target:
+            # go left
+            if currentNode.left:
+                # increment the currentNode
+                currentNode= currentNode.left
+                # return for recursion to work
+                return currentNode.contains(target)
+        elif currentNode.value < target:
+            # go right
+            if currentNode.right:
+                # increment the currentNode
+                currentNode= currentNode.right 
+                # return for recursion to work
+                return currentNode.contains(target)
+        elif currentNode.value == target:
+            # we have a match
+            return True
+        # if no match found
+        else: return False
 
     # Return the maximum value found in the tree
+
     def get_max(self):
-        pass
+        if not self.right:
+            return self.value
+        return self.right.get_max()
+
+
+
+
+        # # while there is still 'right' node
+        # while currentNode.right:
+        #     # check current node val against cur max val
+        #     if currentNode.value > currentMax:
+        #         # update max
+        #         currentMax= currentNode.value
+        #         currentNode.right
+        # return currentMax
+
+        
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        pass
+        # current node
+        currentNode = self
+        fn(currentNode.value)
+        if self.left:
+            nextLeft = self.left
+            nextLeft.for_each(fn)
+        if self.right:
+            nextRight = self.right
+            nextRight.for_each(fn)
 
     # Part 2 -----------------------
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
+
     def in_order_print(self, node):
         pass
 
