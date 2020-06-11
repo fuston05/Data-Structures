@@ -76,20 +76,6 @@ class BSTNode:
             return self.value
         return self.right.get_max()
 
-
-
-
-        # # while there is still 'right' node
-        # while currentNode.right:
-        #     # check current node val against cur max val
-        #     if currentNode.value > currentMax:
-        #         # update max
-        #         currentMax= currentNode.value
-        #         currentNode.right
-        # return currentMax
-
-        
-
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
         # current node
@@ -107,8 +93,20 @@ class BSTNode:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
 
-    def in_order_print(self, node):
-        pass
+    def in_order_print(self, node=None):
+        # everything will get printed... so..
+
+        # if self has a 'left', self is BIGGER
+        if self.left:
+            self.left.in_order_print(self)
+
+        # if self has a 'right', self is SMALLER
+        if self.right:
+            print(self.value)
+            self.right.in_order_print(self)
+            
+
+
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
