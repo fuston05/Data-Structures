@@ -1,14 +1,14 @@
-"""
-Binary search trees are a data structure that enforce an ordering over
-the data they store. That ordering in turn makes it a lot more efficient
-at searching for a particular piece of data in the tree.
 
-This part of the project comprises two days:
-1. Implement the methods `insert`, `contains`, `get_max`, and `for_each`
-   on the BSTNode class.
-2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
-   on the BSTNode class.
-"""
+# Binary search trees are a data structure that enforce an ordering over
+# the data they store. That ordering in turn makes it a lot more efficient
+# at searching for a particular piece of data in the tree.
+
+# This part of the project comprises two days:
+# 1. Implement the methods `insert`, `contains`, `get_max`, and `for_each`
+#    on the BSTNode class.
+# 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
+#    on the BSTNode class.
+
 
 
 class BSTNode:
@@ -53,21 +53,22 @@ class BSTNode:
             # go left
             if currentNode.left:
                 # increment the currentNode
-                currentNode= currentNode.left
+                currentNode = currentNode.left
                 # return for recursion to work
                 return currentNode.contains(target)
         elif currentNode.value < target:
             # go right
             if currentNode.right:
                 # increment the currentNode
-                currentNode= currentNode.right 
+                currentNode = currentNode.right
                 # return for recursion to work
                 return currentNode.contains(target)
         elif currentNode.value == target:
             # we have a match
             return True
         # if no match found
-        else: return False
+        else:
+            return False
 
     # Return the maximum value found in the tree
 
@@ -75,20 +76,6 @@ class BSTNode:
         if not self.right:
             return self.value
         return self.right.get_max()
-
-
-
-
-        # # while there is still 'right' node
-        # while currentNode.right:
-        #     # check current node val against cur max val
-        #     if currentNode.value > currentMax:
-        #         # update max
-        #         currentMax= currentNode.value
-        #         currentNode.right
-        # return currentMax
-
-        
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
@@ -107,18 +94,50 @@ class BSTNode:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
 
-    def in_order_print(self, node):
-        pass
+    def in_order_print(self, node=None):
+        # everything will get printed... so..
+
+        # if self has a 'left', self is BIGGER
+        if self.left:
+            self.left.in_order_print(self)
+
+        print(self.value)
+
+        # if self has a 'right', self is SMALLER
+        if self.right:
+            self.right.in_order_print(self)
 
     # Print the value of every node, starting with the given node,
-    # in an iterative breadth first traversal
-    def bft_print(self, node):
-        pass
+    # in an iterative breadth first traversal FIFO
+
+    def bft_print(self, node=None):
+        Que = []
+        Que.append(self)
+
+        while len(Que) > 0:
+            current = Que.pop(0)
+            print(current.value)
+
+            if current.left:
+                Que.append(current.left)
+
+            if current.right:
+                Que.append(current.right)
 
     # Print the value of every node, starting with the given node,
-    # in an iterative depth first traversal
-    def dft_print(self, node):
-        pass
+    # in an iterative depth first traversal LIFO
+    def dft_print(self, node=None):
+        stack= []
+        stack.append(self)
+
+        while len(stack) > 0:
+            current= stack.pop(len(stack)-1)
+            print(current.value)
+
+            if current.right:
+                stack.append(current.right)
+            if current.left:
+                stack.append(current.left)
 
     # Stretch Goals -------------------------
     # Note: Research may be required
@@ -130,3 +149,15 @@ class BSTNode:
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
         pass
+
+
+bst = BSTNode(1)
+bst.insert(8)
+bst.insert(5)
+bst.insert(7)
+bst.insert(6)
+bst.insert(3)
+bst.insert(4)
+bst.insert(2)
+
+bst.bft_print()
